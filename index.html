@@ -3,87 +3,281 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bar do Tio Chico - Encomendas</title>
-    <link rel="stylesheet" href="estilo.css">
+    <title>Bar do Tio Chico - Oficial</title>
+    <style>
+        /* ESTILO BLINDADO - TUDO AQUI PARA FICAR BONITO NA HORA */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            /* Fundo animado com cores de bar/cerveja */
+            background: linear-gradient(-45deg, #000000, #1a0f00, #3d2600, #1a1a1a);
+            background-size: 400% 400%;
+            animation: gradientBG 12s ease infinite;
+            color: #ffcc00;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding-bottom: 180px; /* Espaço para o rodapé */
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        header h1 {
+            font-size: 2.8rem;
+            margin: 0;
+            text-shadow: 3px 3px 15px rgba(255, 204, 0, 0.6);
+            letter-spacing: 2px;
+        }
+
+        header p {
+            color: #ffffff;
+            font-style: italic;
+            font-size: 1.1rem;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 450px;
+        }
+
+        section {
+            background: rgba(0, 0, 0, 0.75);
+            border: 2px solid #ffcc00;
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            backdrop-filter: blur(10px);
+        }
+
+        h2 {
+            text-align: center;
+            border-bottom: 2px solid #ffcc00;
+            padding-bottom: 10px;
+            margin-top: 0;
+            text-transform: uppercase;
+            font-size: 1.2rem;
+        }
+
+        .produto {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .produto:last-child { border: none; }
+
+        .nome-preco {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .nome-preco .nome { color: #ffffff; font-weight: bold; font-size: 1.05rem; }
+        .nome-preco .preco { color: #ffcc00; font-size: 0.9rem; margin-top: 4px; }
+
+        .controles {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .controles button {
+            width: 35px;
+            height: 35px;
+            border-radius: 10px;
+            border: none;
+            background: #ffcc00;
+            color: #000;
+            font-weight: bold;
+            font-size: 1.4rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .controles button:active { transform: scale(0.85); }
+
+        .controles input {
+            width: 30px;
+            background: transparent;
+            border: none;
+            color: #fff;
+            text-align: center;
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+
+        /* RODAPÉ FIXO */
+        .footer-fixo {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: rgba(15, 15, 15, 0.98);
+            border-top: 3px solid #ffcc00;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            z-index: 1000;
+        }
+
+        .total-display {
+            background: #ffcc00;
+            color: #000;
+            width: 100%;
+            max-width: 450px;
+            text-align: center;
+            padding: 12px;
+            border-radius: 12px;
+            font-size: 1.5rem;
+            font-weight: 900;
+            box-shadow: 0 0 20px rgba(255, 204, 0, 0.3);
+        }
+
+        .btns-group {
+            display: flex;
+            gap: 10px;
+            width: 100%;
+            max-width: 450px;
+        }
+
+        .btn-wpp {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            border-radius: 12px;
+            color: #fff;
+            font-weight: bold;
+            font-size: 0.9rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: 0.3s;
+        }
+
+        .wpp-1 { background: #25d366; }
+        .wpp-2 { background: #128c7e; }
+        .btn-wpp:hover { filter: brightness(1.2); }
+    </style>
 </head>
 <body>
+
     <header>
         <h1>Bar do Tio Chico 🍻</h1>
         <p>O Ponto de Encontro da Colônia</p>
     </header>
 
-    <main>
+    <div class="container">
         <section>
-            <h2>Nossas Bebidas</h2>
+            <h2>Cervejas Geladas</h2>
             <div class="produto">
-                <span>Cerveja Latinha (Amstel/Antarctica)</span>
-                <div class="controles">
-                    <button onclick="mudarQtd('cerveja', -1)">-</button>
-                    <input type="number" id="cerveja" value="0" readonly>
-                    <button onclick="mudarQtd('cerveja', 1)">+</button>
-                </div>
+                <div class="nome-preco"><span class="nome">Antarctica (Lata)</span><span class="preco">R$ 5,00</span></div>
+                <div class="controles"><button onclick="mudar('ant_lata',-1)">-</button><input id="ant_lata" value="0" readonly><button onclick="mudar('ant_lata',1)">+</button></div>
             </div>
             <div class="produto">
-                <span>Coca-Cola 2 Litros</span>
-                <div class="controles">
-                    <button onclick="mudarQtd('coca2l', -1)">-</button>
-                    <input type="number" id="coca2l" value="0" readonly>
-                    <button onclick="mudarQtd('coca2l', 1)">+</button>
-                </div>
+                <div class="nome-preco"><span class="nome">Antarctica (Caixa)</span><span class="preco">R$ 50,00</span></div>
+                <div class="controles"><button onclick="mudar('ant_cx',-1)">-</button><input id="ant_cx" value="0" readonly><button onclick="mudar('ant_cx',1)">+</button></div>
             </div>
             <div class="produto">
-                <span>Coca-Cola Latinha</span>
-                <div class="controles">
-                    <button onclick="mudarQtd('cocalata', -1)">-</button>
-                    <input type="number" id="cocalata" value="0" readonly>
-                    <button onclick="mudarQtd('cocalata', 1)">+</button>
-                </div>
+                <div class="nome-preco"><span class="nome">Skol (Lata)</span><span class="preco">R$ 5,00</span></div>
+                <div class="controles"><button onclick="mudar('skol_lata',-1)">-</button><input id="skol_lata" value="0" readonly><button onclick="mudar('skol_lata',1)">+</button></div>
             </div>
             <div class="produto">
-                <span>Fanta Latinha</span>
-                <div class="controles">
-                    <button onclick="mudarQtd('fanta', -1)">-</button>
-                    <input type="number" id="fanta" value="0" readonly>
-                    <button onclick="mudarQtd('fanta', 1)">+</button>
-                </div>
+                <div class="nome-preco"><span class="nome">Skol (Caixa)</span><span class="preco">R$ 50,00</span></div>
+                <div class="controles"><button onclick="mudar('skol_cx',-1)">-</button><input id="skol_cx" value="0" readonly><button onclick="mudar('skol_cx',1)">+</button></div>
             </div>
             <div class="produto">
-                <span>Pithulinha</span>
-                <div class="controles">
-                    <button onclick="mudarQtd('pithulinha', -1)">-</button>
-                    <input type="number" id="pithulinha" value="0" readonly>
-                    <button onclick="mudarQtd('pithulinha', 1)">+</button>
-                </div>
+                <div class="nome-preco"><span class="nome">Amstel (Lata)</span><span class="preco">R$ 5,00</span></div>
+                <div class="controles"><button onclick="mudar('ams_lata',-1)">-</button><input id="ams_lata" value="0" readonly><button onclick="mudar('ams_lata',1)">+</button></div>
+            </div>
+            <div class="produto">
+                <div class="nome-preco"><span class="nome">Amstel (Caixa)</span><span class="preco">R$ 50,00</span></div>
+                <div class="controles"><button onclick="mudar('ams_cx',-1)">-</button><input id="ams_cx" value="0" readonly><button onclick="mudar('ams_cx',1)">+</button></div>
             </div>
         </section>
 
         <section>
-            <h2>Outros e Derivados</h2>
+            <h2>Bebidas e Diversos</h2>
             <div class="produto">
-                <span>Salgadinhos (Pacote)</span>
-                <div class="controles">
-                    <button onclick="mudarQtd('skiny', -1)">-</button>
-                    <input type="number" id="skiny" value="0" readonly>
-                    <button onclick="mudarQtd('skiny', 1)">+</button>
-                </div>
+                <div class="nome-preco"><span class="nome">Coca 2L</span><span class="preco">R$ 14,00</span></div>
+                <div class="controles"><button onclick="mudar('c2l',-1)">-</button><input id="c2l" value="0" readonly><button onclick="mudar('c2l',1)">+</button></div>
             </div>
             <div class="produto">
-                <span>Cachaça de Primeira</span>
-                <div class="controles">
-                    <button onclick="mudarQtd('cachaca', -1)">-</button>
-                    <input type="number" id="cachaca" value="0" readonly>
-                    <button onclick="mudarQtd('cachaca', 1)">+</button>
-                </div>
+                <div class="nome-preco"><span class="nome">Pepsi 3L</span><span class="preco">R$ 12,00</span></div>
+                <div class="controles"><button onclick="mudar('p3l',-1)">-</button><input id="p3l" value="0" readonly><button onclick="mudar('p3l',1)">+</button></div>
+            </div>
+            <div class="produto">
+                <div class="nome-preco"><span class="nome">Guaraná</span><span class="preco">R$ 10,00</span></div>
+                <div class="controles"><button onclick="mudar('gua',-1)">-</button><input id="gua" value="0" readonly><button onclick="mudar('gua',1)">+</button></div>
+            </div>
+            <div class="produto">
+                <div class="nome-preco"><span class="nome">Cachaça</span><span class="preco">R$ 12,00</span></div>
+                <div class="controles"><button onclick="mudar('cac',-1)">-</button><input id="cac" value="0" readonly><button onclick="mudar('cac',1)">+</button></div>
+            </div>
+            <div class="produto">
+                <div class="nome-preco"><span class="nome">Cigarros</span><span class="preco">R$ 10,00</span></div>
+                <div class="controles"><button onclick="mudar('cig',-1)">-</button><input id="cig" value="0" readonly><button onclick="mudar('cig',1)">+</button></div>
+            </div>
+            <div class="produto">
+                <div class="nome-preco"><span class="nome">Skiny</span><span class="preco">R$ 2,50</span></div>
+                <div class="controles"><button onclick="mudar('ski',-1)">-</button><input id="ski" value="0" readonly><button onclick="mudar('ski',1)">+</button></div>
             </div>
         </section>
+    </div>
 
-        <div class="total-caixa">
-            <h3>TOTAL DO PEDIDO: R$ <span id="valor-total">0,00</span></h3>
+    <div class="footer-fixo">
+        <div class="total-display">TOTAL: R$ <span id="res">0,00</span></div>
+        <div class="btns-group">
+            <button onclick="zap(1)" class="btn-wpp wpp-1">WhatsApp 1 📱</button>
+            <button onclick="zap(2)" class="btn-wpp wpp-2">WhatsApp 2 📱</button>
         </div>
+    </div>
 
-        <button onclick="enviarPedido(1)" class="btn-whats">Enviar Pedido no WhatsApp 📱</button>
-    </main>
+    <script>
+        const tab = {
+            ant_lata:5, ant_cx:50, skol_lata:5, skol_cx:50, ams_lata:5, ams_cx:50,
+            c2l:14, p3l:12, gua:10, cac:12, cig:10, ski:2.5
+        };
 
-    <script src="script.js"></script>
+        function mudar(id, v) {
+            let el = document.getElementById(id);
+            let n = parseInt(el.value) + v;
+            if (n >= 0) { el.value = n; calc(); }
+        }
+
+        function calc() {
+            let t = 0;
+            for (let k in tab) { t += parseInt(document.getElementById(k).value) * tab[k]; }
+            document.getElementById('res').innerText = t.toFixed(2).replace('.', ',');
+        }
+
+        function zap(n) {
+            let m = "*PEDIDO - BAR DO TIO CHICO* 🍻\n\n";
+            let ok = false;
+            for (let k in tab) {
+                let q = document.getElementById(k).value;
+                if (q > 0) { m += `• ${k.toUpperCase()}: ${q}\n`; ok = true; }
+            }
+            if (!ok) return alert("Selecione algo!");
+            m += `\n*TOTAL: R$ ${document.getElementById('res').innerText}*`;
+            let f = (n === 1) ? "5568992380864" : "5568992569482";
+            window.open(`https://wa.me/${f}?text=${encodeURIComponent(m)}`);
+        }
+    </script>
 </body>
 </html>
