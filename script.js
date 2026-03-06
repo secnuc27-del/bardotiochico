@@ -1,49 +1,44 @@
-function enviarPedido(opcao) {
-    // Quantidades das Cervejas
-    const antarctica = document.getElementById('antarctica').value;
-    const skol = document.getElementById('skol').value;
-    const amstel = document.getElementById('amstel').value;
-    
-    // Quantidades das Bebidas
-    const coca2l = document.getElementById('coca2l').value;
-    const pepsi3l = document.getElementById('pepsi3l').value;
-    const guarana = document.getElementById('guarana').value;
-    const cocalata = document.getElementById('cocalata').value;
-    const fanta = document.getElementById('fanta').value;
-    const pithulinha = document.getElementById('pithulinha').value;
-    const cachaca = document.getElementById('cachaca').value;
-    
-    // Outros e Skiny
-    const skiny = document.getElementById('skiny').value;
-    const salgadinho = document.getElementById('salgadinho').value;
-    const cigarro = document.getElementById('cigarro').value;
+const precos = {
+    cerveja: 6.00,
+    coca2l: 12.00,
+    skiny: 5.00
+};
 
-    // Verifica se algo foi preenchido
-    if (!antarctica && !skol && !amstel && !coca2l && !pepsi3l && !guarana && !cocalata && !fanta && !pithulinha && !cachaca && !skiny && !salgadinho && !cigarro) {
-        alert("Por favor, informe a quantidade de algum item.");
-        return;
+function mudarQtd(id, mudanca) {
+    const campo = document.getElementById(id);
+    let valor = parseInt(campo.value) + mudanca;
+    if (valor < 0) valor = 0;
+    campo.value = valor;
+    calcularTotal();
+}
+
+function calcularTotal() {
+    let total = 0;
+    for (let item in precos) {
+        let elemento = document.getElementById(item);
+        if (elemento) {
+            total += parseInt(elemento.value) * precos[item];
+        }
+    }
+    document.getElementById('valor-total').innerText = total.toFixed(2).replace('.', ',');
+}
+
+function enviarPedido(opcao) {
+    let texto = "*PEDIDO - BAR DO TIO CHICO* 🍻\n\n";
+    let total = document.getElementById('valor-total').innerText;
+    let temItem = false;
+
+    for (let item in precos) {
+        let qtd = document.getElementById(item).value;
+        if (qtd > 0) {
+            texto += `✅ ${item.toUpperCase()}: ${qtd}\n`;
+            temItem = true;
+        }
     }
 
-    // Monta o texto
-    let texto = "*PEDIDO - BAR DO TIO CHICO* 🍻\n\n";
-    texto += "Olá! Segue minha encomenda:\n";
-    
-    if (antarctica > 0) texto += `🍺 Antarctica: ${antarctica}\n`;
-    if (skol > 0) texto += `🍺 Skol: ${skol}\n`;
-    if (amstel > 0) texto += `🍺 Amstel: ${amstel}\n`;
-    if (coca2l > 0) texto += `🥤 Coca 2L: ${coca2l}\n`;
-    if (pepsi3l > 0) texto += `🥤 Pepsi 3L: ${pepsi3l}\n`;
-    if (guarana > 0) texto += `🥤 Guaraná: ${guarana}\n`;
-    if (cocalata > 0) texto += `🥤 Coca Lata: ${cocalata}\n`;
-    if (fanta > 0) texto += `🥤 Fanta Lata: ${fanta}\n`;
-    if (pithulinha > 0) texto += `🥤 Pithulinha: ${pithulinha}\n`;
-    if (cachaca > 0) texto += `🥃 Cachaça: ${cachaca}\n`;
-    if (skiny > 0) texto += `🥨 Skiny: ${skiny}\n`;
-    if (salgadinho > 0) texto += `🥨 Salgadinhos: ${salgadinho}\n`;
-    if (cigarro > 0) texto += `🚬 Cigarros: ${cigarro}\n`;
+    if (!temItem) return alert("Adicione um item!");
 
-    const mensagemFinal = encodeURIComponent(texto);
-    let numeroWhats = (opcao === 1) ? "5568992380864" : "5568992569482"; 
-
-    window.open(`https://wa.me/${numeroWhats}?text=${mensagemFinal}`, '_blank');
+    texto += `\n💰 *TOTAL: R$ ${total}*`;
+    const num = (opcao === 1) ? "5568992380864" : "5568992569482";
+    window.open(`https://wa.me/${num}?text=${encodeURIComponent(texto)}`, '_blank');
 }
