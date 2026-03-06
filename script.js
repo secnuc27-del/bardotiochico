@@ -1,49 +1,42 @@
-// Preços do Bar do Tio Chico (Ajuste os valores se precisar)
 const precos = {
-    cerveja: 6.00,
-    coca2l: 12.00,
-    cocalata: 5.00,
-    fanta: 5.00,
-    pithulinha: 3.00,
-    skiny: 5.00,
-    cachaca: 4.00
+    ant_lata: 5, ant_cx: 50, skol_lata: 5, skol_cx: 50, ams_lata: 5, ams_cx: 50,
+    c2l: 14, clata: 5, p3l: 12, gua: 10, fanta: 5, cac: 12, cig: 10, ski: 2.5
 };
 
-function mudarQtd(id, mudanca) {
-    const campo = document.getElementById(id);
-    let valor = parseInt(campo.value) + mudanca;
-    if (valor < 0) valor = 0;
-    campo.value = valor;
-    calcularTotal();
-}
-
-function calcularTotal() {
-    let total = 0;
-    for (let item in precos) {
-        let elemento = document.getElementById(item);
-        if (elemento) {
-            total += parseInt(elemento.value) * precos[item];
-        }
+function mudar(id, val) {
+    let input = document.getElementById(id);
+    let total = parseInt(input.value) + val;
+    if (total >= 0) {
+        input.value = total;
+        atualizarTotal();
     }
-    document.getElementById('valor-total').innerText = total.toFixed(2).replace('.', ',');
 }
 
-function enviarPedido(opcao) {
-    let texto = "*NOVO PEDIDO - BAR DO TIO CHICO* 🍻\n\n";
-    let total = document.getElementById('valor-total').innerText;
-    let temItem = false;
+function atualizarTotal() {
+    let soma = 0;
+    for (let item in precos) {
+        let qtd = parseInt(document.getElementById(item).value);
+        soma += qtd * precos[item];
+    }
+    document.getElementById('res').innerText = soma.toFixed(2).replace('.', ',');
+}
+
+function zap(numero) {
+    let mensagem = "*NOVO PEDIDO - BAR DO TIO CHICO* 🍻\n\n";
+    let temAlgo = false;
 
     for (let item in precos) {
         let qtd = document.getElementById(item).value;
         if (qtd > 0) {
-            texto += `✅ ${item.toUpperCase()}: ${qtd}\n`;
-            temItem = true;
+            mensagem += `✅ ${item.toUpperCase()}: ${qtd}\n`;
+            temAlgo = true;
         }
     }
 
-    if (!temItem) return alert("Por favor, adicione algum item primeiro!");
+    if (!temAlgo) return alert("Adicione itens ao seu pedido primeiro!");
 
-    texto += `\n💰 *VALOR TOTAL: R$ ${total}*`;
-    const num = "5568992380864"; // Número principal
-    window.open(`https://wa.me/${num}?text=${encodeURIComponent(texto)}`, '_blank');
+    mensagem += `\n💰 *TOTAL: R$ ${document.getElementById('res').innerText}*`;
+    
+    let fone = (numero === 1) ? "5568992380864" : "5568992569482";
+    window.open(`https://wa.me/${fone}?text=${encodeURIComponent(mensagem)}`, '_blank');
 }
