@@ -1,5 +1,5 @@
 const precos = {
-    ant_lata: 5, ant_cx: 50, skol_lata: 5, skol_cx: 50, ams_lata: 5, ams_cx: 50,
+    ant_lata: 5, ant_cx: 50, skol_lata: 5, skol_cx: 50, ams_lata: 5, ams_cx: 42,
     c2l: 14, clata: 5, p3l: 12, gua: 10, fanta: 5, cac: 12, cig: 10, ski: 2.5
 };
 
@@ -40,3 +40,4 @@ function zap(numero) {
     let fone = (numero === 1) ? "5568992380864" : "5568992569482";
     window.open(`https://wa.me/${fone}?text=${encodeURIComponent(mensagem)}`, '_blank');
 }
+
