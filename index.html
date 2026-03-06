@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
@@ -218,6 +218,14 @@
                 <div class="controles"><button onclick="mudar('c2l',-1)">-</button><input id="c2l" value="0" readonly><button onclick="mudar('c2l',1)">+</button></div>
             </div>
             <div class="produto">
+                <div class="nome-preco"><span class="nome">Coca-Cola (Latinha)</span><span class="preco">R$ 5,00</span></div>
+                <div class="controles"><button onclick="mudar('coca_lata',-1)">-</button><input id="coca_lata" value="0" readonly><button onclick="mudar('coca_lata',1)">+</button></div>
+            </div>
+            <div class="produto">
+                <div class="nome-preco"><span class="nome">Fanta (Latinha)</span><span class="preco">R$ 5,00</span></div>
+                <div class="controles"><button onclick="mudar('fanta_lata',-1)">-</button><input id="fanta_lata" value="0" readonly><button onclick="mudar('fanta_lata',1)">+</button></div>
+            </div>
+            <div class="produto">
                 <div class="nome-preco"><span class="nome">Pepsi 3L</span><span class="preco">R$ 12,00</span></div>
                 <div class="controles"><button onclick="mudar('p3l',-1)">-</button><input id="p3l" value="0" readonly><button onclick="mudar('p3l',1)">+</button></div>
             </div>
@@ -251,7 +259,7 @@
     <script>
         const tab = {
             ant_lata:5, ant_cx:50, skol_lata:5, skol_cx:50, ams_lata:5, ams_cx:50,
-            c2l:14, p3l:12, gua:10, cac:12, cig:10, ski:2.5
+            c2l:14, coca_lata:5, fanta_lata:5, p3l:12, gua:10, cac:12, cig:10, ski:2.5
         };
 
         function mudar(id, v) {
