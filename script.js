@@ -1,7 +1,12 @@
+// Preços do Bar do Tio Chico (Ajuste os valores se precisar)
 const precos = {
     cerveja: 6.00,
     coca2l: 12.00,
-    skiny: 5.00
+    cocalata: 5.00,
+    fanta: 5.00,
+    pithulinha: 3.00,
+    skiny: 5.00,
+    cachaca: 4.00
 };
 
 function mudarQtd(id, mudanca) {
@@ -24,7 +29,7 @@ function calcularTotal() {
 }
 
 function enviarPedido(opcao) {
-    let texto = "*PEDIDO - BAR DO TIO CHICO* 🍻\n\n";
+    let texto = "*NOVO PEDIDO - BAR DO TIO CHICO* 🍻\n\n";
     let total = document.getElementById('valor-total').innerText;
     let temItem = false;
 
@@ -36,9 +41,9 @@ function enviarPedido(opcao) {
         }
     }
 
-    if (!temItem) return alert("Adicione um item!");
+    if (!temItem) return alert("Por favor, adicione algum item primeiro!");
 
-    texto += `\n💰 *TOTAL: R$ ${total}*`;
-    const num = (opcao === 1) ? "5568992380864" : "5568992569482";
+    texto += `\n💰 *VALOR TOTAL: R$ ${total}*`;
+    const num = "5568992380864"; // Número principal
     window.open(`https://wa.me/${num}?text=${encodeURIComponent(texto)}`, '_blank');
 }
