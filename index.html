@@ -1,27 +1,45 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bar do Tio Chico - Oficial</title>
     <style>
-        /* ESTILO BLINDADO - TUDO AQUI PARA FICAR BONITO NA HORA */
+        * {
+            box-sizing: border-box;
+        }
+
+        :root {
+            --dourado: #ffcc00;
+            --dourado-forte: #ffb700;
+            --ambar: #ff8c00;
+            --preto: #050505;
+            --painel: rgba(0, 0, 0, 0.55);
+            --borda: rgba(255, 204, 0, 0.45);
+            --branco: #ffffff;
+            --verde1: #25d366;
+            --verde2: #128c7e;
+            --cerveja: #f7c948;
+            --espuma: #fff7d6;
+        }
+
         body {
             margin: 0;
             padding: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(180deg, #050505, #1a0f00, #2a1600, #120900, #000000);
-            color: #ffcc00;
+            background:
+                radial-gradient(circle at top, rgba(255, 170, 0, 0.10), transparent 30%),
+                linear-gradient(180deg, #050505, #120900, #1a0f00, #2a1600, #000000);
+            color: var(--dourado);
             display: flex;
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
-            padding-bottom: 180px;
+            padding-bottom: 190px;
             position: relative;
             overflow-x: hidden;
         }
 
-        /* CAMADA ANIMADA DE FUNDO */
         .fundo-animado {
             position: fixed;
             inset: 0;
@@ -30,40 +48,66 @@
             pointer-events: none;
         }
 
-        /* BOLHAS */
+        .fundo-animado::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at 20% 80%, rgba(255, 204, 0, 0.08), transparent 18%),
+                radial-gradient(circle at 80% 20%, rgba(255, 140, 0, 0.08), transparent 20%),
+                radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.03), transparent 25%);
+            animation: brilhoFundo 8s ease-in-out infinite alternate;
+        }
+
         .bolha {
             position: absolute;
-            bottom: -120px;
+            bottom: -140px;
             border-radius: 50%;
-            background: rgba(255, 230, 150, 0.18);
-            box-shadow: 0 0 12px rgba(255, 220, 120, 0.18);
+            background: rgba(255, 233, 164, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow:
+                inset 0 0 12px rgba(255,255,255,0.05),
+                0 0 16px rgba(255, 204, 0, 0.08);
             animation: subirBolha linear infinite;
         }
 
-        .b1 { left: 5%; width: 18px; height: 18px; animation-duration: 10s; animation-delay: 0s; }
-        .b2 { left: 15%; width: 30px; height: 30px; animation-duration: 14s; animation-delay: 2s; }
-        .b3 { left: 28%; width: 22px; height: 22px; animation-duration: 12s; animation-delay: 1s; }
-        .b4 { left: 42%; width: 35px; height: 35px; animation-duration: 16s; animation-delay: 4s; }
-        .b5 { left: 58%; width: 20px; height: 20px; animation-duration: 11s; animation-delay: 3s; }
-        .b6 { left: 70%; width: 28px; height: 28px; animation-duration: 15s; animation-delay: 5s; }
-        .b7 { left: 82%; width: 16px; height: 16px; animation-duration: 9s; animation-delay: 2s; }
-        .b8 { left: 92%; width: 26px; height: 26px; animation-duration: 13s; animation-delay: 6s; }
+        .b1 { left: 4%; width: 18px; height: 18px; animation-duration: 10s; animation-delay: 0s; }
+        .b2 { left: 12%; width: 30px; height: 30px; animation-duration: 14s; animation-delay: 2s; }
+        .b3 { left: 25%; width: 16px; height: 16px; animation-duration: 9s; animation-delay: 1s; }
+        .b4 { left: 36%; width: 34px; height: 34px; animation-duration: 15s; animation-delay: 4s; }
+        .b5 { left: 48%; width: 20px; height: 20px; animation-duration: 11s; animation-delay: 2.5s; }
+        .b6 { left: 57%; width: 28px; height: 28px; animation-duration: 13s; animation-delay: 5s; }
+        .b7 { left: 69%; width: 14px; height: 14px; animation-duration: 8s; animation-delay: 1.5s; }
+        .b8 { left: 78%; width: 25px; height: 25px; animation-duration: 12s; animation-delay: 3s; }
+        .b9 { left: 88%; width: 32px; height: 32px; animation-duration: 16s; animation-delay: 6s; }
+        .b10 { left: 95%; width: 18px; height: 18px; animation-duration: 10s; animation-delay: 4s; }
 
-        /* CERVEJAS FLUTUANDO */
-        .cerveja {
+        .cerveja-bg {
             position: absolute;
-            bottom: -100px;
-            font-size: 2rem;
-            opacity: 0.14;
-            animation: subirCerveja linear infinite;
-            filter: drop-shadow(0 0 8px rgba(255, 204, 0, 0.18));
+            bottom: -120px;
+            opacity: 0.12;
+            animation: subirCervejaBg linear infinite;
+            filter: drop-shadow(0 0 10px rgba(255, 204, 0, 0.12));
+            user-select: none;
         }
 
-        .c1 { left: 10%; animation-duration: 18s; animation-delay: 0s; }
-        .c2 { left: 30%; animation-duration: 22s; animation-delay: 5s; font-size: 2.4rem; }
-        .c3 { left: 55%; animation-duration: 20s; animation-delay: 2s; }
-        .c4 { left: 75%; animation-duration: 24s; animation-delay: 7s; font-size: 2.2rem; }
-        .c5 { left: 90%; animation-duration: 19s; animation-delay: 3s; }
+        .c1 { left: 7%; font-size: 2.2rem; animation-duration: 18s; animation-delay: 0s; }
+        .c2 { left: 22%; font-size: 2.7rem; animation-duration: 23s; animation-delay: 5s; }
+        .c3 { left: 41%; font-size: 2.4rem; animation-duration: 20s; animation-delay: 2s; }
+        .c4 { left: 60%; font-size: 2.8rem; animation-duration: 24s; animation-delay: 8s; }
+        .c5 { left: 79%; font-size: 2.3rem; animation-duration: 19s; animation-delay: 3s; }
+        .c6 { left: 92%; font-size: 2.6rem; animation-duration: 22s; animation-delay: 6s; }
+
+        @keyframes brilhoFundo {
+            0% {
+                transform: scale(1) translateY(0);
+                opacity: 0.7;
+            }
+            100% {
+                transform: scale(1.08) translateY(-8px);
+                opacity: 1;
+            }
+        }
 
         @keyframes subirBolha {
             0% {
@@ -74,202 +118,545 @@
                 opacity: 1;
             }
             50% {
-                transform: translateY(-50vh) translateX(18px) scale(1);
-                opacity: 0.8;
+                transform: translateY(-50vh) translateX(20px) scale(1);
+                opacity: 0.75;
             }
             100% {
-                transform: translateY(-115vh) translateX(-12px) scale(1.2);
+                transform: translateY(-120vh) translateX(-15px) scale(1.25);
                 opacity: 0;
             }
         }
 
-        @keyframes subirCerveja {
+        @keyframes subirCervejaBg {
             0% {
-                transform: translateY(0) rotate(0deg);
+                transform: translateY(0) rotate(0deg) translateX(0);
                 opacity: 0;
             }
             10% {
                 opacity: 0.12;
             }
             50% {
-                transform: translateY(-50vh) rotate(8deg) translateX(12px);
+                transform: translateY(-55vh) rotate(8deg) translateX(12px);
                 opacity: 0.16;
             }
             100% {
-                transform: translateY(-115vh) rotate(-8deg) translateX(-10px);
+                transform: translateY(-120vh) rotate(-10deg) translateX(-14px);
                 opacity: 0;
             }
         }
 
         header {
             text-align: center;
-            padding: 40px 20px;
+            padding: 34px 20px 24px;
             position: relative;
             z-index: 2;
         }
 
+        .topo-festa {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 18px;
+            flex-wrap: nowrap;
+        }
+
+        .titulo-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
         header h1 {
-            font-size: 2.8rem;
             margin: 0;
-            text-shadow: 3px 3px 15px rgba(255, 204, 0, 0.6);
+            font-size: 2.9rem;
+            font-weight: 900;
             letter-spacing: 2px;
+            color: #fff1b3;
+            text-shadow:
+                0 0 6px rgba(255, 204, 0, 0.8),
+                0 0 12px rgba(255, 204, 0, 0.6),
+                0 0 22px rgba(255, 153, 0, 0.45);
+            animation: tituloPulseMove 2.2s ease-in-out infinite alternate;
         }
 
         header p {
-            color: #ffffff;
+            margin-top: 10px;
+            color: rgba(255,255,255,0.88);
             font-style: italic;
-            font-size: 1.1rem;
+            font-size: 1.05rem;
+            letter-spacing: 0.4px;
+        }
+
+        @keyframes tituloPulseMove {
+            0% {
+                transform: translateY(0) scale(1) rotate(-0.4deg);
+                text-shadow:
+                    0 0 5px rgba(255, 204, 0, 0.65),
+                    0 0 12px rgba(255, 204, 0, 0.45),
+                    0 0 18px rgba(255, 140, 0, 0.25);
+            }
+            50% {
+                transform: translateY(-3px) scale(1.03) rotate(0deg);
+                text-shadow:
+                    0 0 10px rgba(255, 204, 0, 0.85),
+                    0 0 18px rgba(255, 204, 0, 0.70),
+                    0 0 28px rgba(255, 140, 0, 0.40);
+            }
+            100% {
+                transform: translateY(1px) scale(1.01) rotate(0.4deg);
+                text-shadow:
+                    0 0 8px rgba(255, 204, 0, 0.95),
+                    0 0 20px rgba(255, 204, 0, 0.80),
+                    0 0 34px rgba(255, 140, 0, 0.55);
+            }
+        }
+
+        /* COPOS ANIMADOS */
+        .brinde {
+            position: relative;
+            width: 86px;
+            height: 86px;
+            flex-shrink: 0;
+        }
+
+        .copo {
+            position: absolute;
+            width: 34px;
+            height: 52px;
+            bottom: 8px;
+            border-radius: 8px 8px 12px 12px;
+            border: 2px solid rgba(255,255,255,0.55);
+            background: linear-gradient(to top, rgba(247, 201, 72, 0.92) 0 64%, rgba(255,255,255,0.10) 64% 100%);
+            box-shadow:
+                inset 0 0 0 1px rgba(255,255,255,0.12),
+                0 0 14px rgba(255, 204, 0, 0.15);
+            overflow: visible;
+            transform-origin: bottom center;
+        }
+
+        .copo::before {
+            content: "";
+            position: absolute;
+            left: 3px;
+            right: 3px;
+            top: 2px;
+            height: 8px;
+            border-radius: 8px;
+            background: var(--espuma);
+            box-shadow: 0 0 6px rgba(255,255,255,0.25);
+        }
+
+        .copo::after {
+            content: "";
+            position: absolute;
+            top: 10px;
+            bottom: 6px;
+            width: 5px;
+            background: rgba(255,255,255,0.12);
+            border-radius: 6px;
+            left: 5px;
+        }
+
+        .copo-esq {
+            left: 6px;
+            animation: brindeEsq 2.8s ease-in-out infinite;
+        }
+
+        .copo-dir {
+            right: 6px;
+            animation: brindeDir 2.8s ease-in-out infinite;
+        }
+
+        .espirro {
+            position: absolute;
+            width: 12px;
+            height: 24px;
+            background: linear-gradient(to top, rgba(247, 201, 72, 0.95), rgba(255, 235, 150, 0.15));
+            border-radius: 12px 12px 20px 20px;
+            opacity: 0;
+            filter: blur(0.2px);
+        }
+
+        .espirro.e1 {
+            left: 26px;
+            bottom: 46px;
+            animation: espumaE1 2.8s ease-in-out infinite;
+        }
+
+        .espirro.e2 {
+            right: 26px;
+            bottom: 46px;
+            animation: espumaE2 2.8s ease-in-out infinite;
+        }
+
+        .espirro.e3 {
+            left: 37px;
+            bottom: 52px;
+            width: 10px;
+            height: 28px;
+            animation: espumaCentro 2.8s ease-in-out infinite;
+        }
+
+        .mini-bolha {
+            position: absolute;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: rgba(255, 246, 205, 0.85);
+            opacity: 0;
+        }
+
+        .mini-bolha.mb1 { left: 30px; bottom: 60px; animation: bolhinhasBrinde 2.8s ease-in-out infinite; }
+        .mini-bolha.mb2 { left: 42px; bottom: 64px; animation: bolhinhasBrinde 2.8s ease-in-out infinite 0.08s; }
+        .mini-bolha.mb3 { left: 50px; bottom: 61px; animation: bolhinhasBrinde 2.8s ease-in-out infinite 0.14s; }
+
+        @keyframes brindeEsq {
+            0%, 100% {
+                transform: translateX(0) rotate(-10deg);
+            }
+            25% {
+                transform: translateX(2px) rotate(-14deg);
+            }
+            42% {
+                transform: translateX(12px) rotate(-30deg);
+            }
+            50% {
+                transform: translateX(16px) rotate(-38deg);
+            }
+            58% {
+                transform: translateX(12px) rotate(-28deg);
+            }
+            75% {
+                transform: translateX(1px) rotate(-12deg);
+            }
+        }
+
+        @keyframes brindeDir {
+            0%, 100% {
+                transform: translateX(0) rotate(10deg);
+            }
+            25% {
+                transform: translateX(-2px) rotate(14deg);
+            }
+            42% {
+                transform: translateX(-12px) rotate(30deg);
+            }
+            50% {
+                transform: translateX(-16px) rotate(38deg);
+            }
+            58% {
+                transform: translateX(-12px) rotate(28deg);
+            }
+            75% {
+                transform: translateX(-1px) rotate(12deg);
+            }
+        }
+
+        @keyframes espumaE1 {
+            0%, 35%, 100% {
+                opacity: 0;
+                transform: translateY(0) scaleY(0.3) rotate(-12deg);
+            }
+            45% {
+                opacity: 0.95;
+                transform: translateY(-18px) scaleY(1.1) rotate(-16deg);
+            }
+            54% {
+                opacity: 0.7;
+                transform: translateY(-30px) translateX(-4px) scaleY(1.25) rotate(-20deg);
+            }
+            64% {
+                opacity: 0;
+                transform: translateY(-40px) translateX(-8px) scaleY(0.9) rotate(-24deg);
+            }
+        }
+
+        @keyframes espumaE2 {
+            0%, 35%, 100% {
+                opacity: 0;
+                transform: translateY(0) scaleY(0.3) rotate(12deg);
+            }
+            45% {
+                opacity: 0.95;
+                transform: translateY(-18px) scaleY(1.1) rotate(16deg);
+            }
+            54% {
+                opacity: 0.7;
+                transform: translateY(-30px) translateX(4px) scaleY(1.25) rotate(20deg);
+            }
+            64% {
+                opacity: 0;
+                transform: translateY(-40px) translateX(8px) scaleY(0.9) rotate(24deg);
+            }
+        }
+
+        @keyframes espumaCentro {
+            0%, 38%, 100% {
+                opacity: 0;
+                transform: translateY(0) scaleY(0.2);
+            }
+            48% {
+                opacity: 1;
+                transform: translateY(-20px) scaleY(1.2);
+            }
+            58% {
+                opacity: 0.65;
+                transform: translateY(-34px) scaleY(1.35);
+            }
+            68% {
+                opacity: 0;
+                transform: translateY(-46px) scaleY(0.85);
+            }
+        }
+
+        @keyframes bolhinhasBrinde {
+            0%, 40%, 100% {
+                opacity: 0;
+                transform: translateY(0) scale(0.4);
+            }
+            50% {
+                opacity: 1;
+                transform: translateY(-10px) scale(1);
+            }
+            62% {
+                opacity: 0.75;
+                transform: translateY(-24px) translateX(2px) scale(1.1);
+            }
+            72% {
+                opacity: 0;
+                transform: translateY(-34px) translateX(5px) scale(0.7);
+            }
         }
 
         .container {
-            width: 90%;
-            max-width: 450px;
+            width: 92%;
+            max-width: 480px;
             position: relative;
             z-index: 2;
         }
 
         section {
-            background: rgba(0, 0, 0, 0.78);
-            border: 2px solid #ffcc00;
-            border-radius: 20px;
-            padding: 20px;
-            margin-bottom: 25px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-            backdrop-filter: blur(8px);
+            background: linear-gradient(180deg, rgba(22,22,22,0.72), rgba(0,0,0,0.62));
+            border: 1.5px solid var(--borda);
+            border-radius: 24px;
+            padding: 22px 18px;
+            margin-bottom: 22px;
+            box-shadow:
+                0 12px 30px rgba(0,0,0,0.55),
+                inset 0 0 0 1px rgba(255,255,255,0.03);
+            backdrop-filter: blur(12px);
         }
 
         h2 {
             text-align: center;
-            border-bottom: 2px solid #ffcc00;
+            margin: 0 0 16px;
             padding-bottom: 10px;
-            margin-top: 0;
+            font-size: 1.08rem;
             text-transform: uppercase;
-            font-size: 1.2rem;
+            letter-spacing: 1.2px;
+            color: #ffe082;
+            border-bottom: 1px solid rgba(255, 204, 0, 0.28);
         }
 
         .produto {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            gap: 12px;
+            padding: 14px 10px;
+            border-radius: 16px;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            transition: 0.25s ease;
+        }
+
+        .produto:hover {
+            background: rgba(255, 204, 0, 0.05);
+            transform: translateY(-1px);
+            box-shadow: inset 0 0 0 1px rgba(255, 204, 0, 0.08);
         }
 
         .produto:last-child {
-            border: none;
+            border-bottom: none;
         }
 
         .nome-preco {
             display: flex;
             flex-direction: column;
+            min-width: 0;
         }
 
         .nome-preco .nome {
-            color: #ffffff;
-            font-weight: bold;
-            font-size: 1.05rem;
+            color: var(--branco);
+            font-weight: 700;
+            font-size: 1rem;
+            line-height: 1.2;
         }
 
         .nome-preco .preco {
-            color: #ffcc00;
-            font-size: 0.9rem;
+            color: #ffd54f;
+            font-size: 0.92rem;
             margin-top: 4px;
+            font-weight: 700;
         }
 
         .controles {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
+            flex-shrink: 0;
         }
 
         .controles button {
-            width: 35px;
-            height: 35px;
-            border-radius: 10px;
-            border: none;
-            background: #ffcc00;
-            color: #000;
-            font-weight: bold;
-            font-size: 1.4rem;
+            width: 38px;
+            height: 38px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 204, 0, 0.25);
+            background: linear-gradient(180deg, #ffd54f, #ffbf00);
+            color: #1a1a1a;
+            font-weight: 900;
+            font-size: 1.25rem;
             cursor: pointer;
-            transition: 0.2s;
+            transition: transform 0.15s ease, filter 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 4px 14px rgba(255, 204, 0, 0.18);
+        }
+
+        .controles button:hover {
+            filter: brightness(1.08);
+            box-shadow: 0 6px 18px rgba(255, 204, 0, 0.28);
+            transform: translateY(-1px);
         }
 
         .controles button:active {
-            transform: scale(0.85);
+            transform: scale(0.90);
         }
 
         .controles input {
-            width: 30px;
+            width: 34px;
             background: transparent;
             border: none;
             color: #fff;
             text-align: center;
-            font-size: 1.3rem;
-            font-weight: bold;
+            font-size: 1.2rem;
+            font-weight: 800;
+            outline: none;
         }
 
-        /* RODAPÉ FIXO */
         .footer-fixo {
             position: fixed;
             bottom: 0;
             width: 100%;
-            background: rgba(15, 15, 15, 0.98);
-            border-top: 3px solid #ffcc00;
-            padding: 20px;
+            padding: 16px 14px 18px;
+            background: linear-gradient(180deg, rgba(10,10,10,0.90), rgba(10,10,10,0.98));
+            border-top: 1px solid rgba(255, 204, 0, 0.30);
+            backdrop-filter: blur(14px);
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 12px;
             z-index: 1000;
+            box-shadow: 0 -8px 30px rgba(0,0,0,0.35);
         }
 
         .total-display {
-            background: #ffcc00;
-            color: #000;
             width: 100%;
-            max-width: 450px;
+            max-width: 480px;
             text-align: center;
-            padding: 12px;
-            border-radius: 12px;
-            font-size: 1.5rem;
+            padding: 14px;
+            border-radius: 16px;
+            font-size: 1.45rem;
             font-weight: 900;
-            box-shadow: 0 0 20px rgba(255, 204, 0, 0.3);
+            color: #1a1300;
+            background: linear-gradient(180deg, #ffe082, #ffcc00);
+            box-shadow:
+                0 0 0 1px rgba(255,255,255,0.15) inset,
+                0 8px 24px rgba(255, 204, 0, 0.22);
         }
 
         .btns-group {
             display: flex;
             gap: 10px;
             width: 100%;
-            max-width: 450px;
+            max-width: 480px;
         }
 
         .btn-wpp {
             flex: 1;
-            padding: 15px;
+            padding: 14px 12px;
             border: none;
-            border-radius: 12px;
+            border-radius: 15px;
             color: #fff;
-            font-weight: bold;
-            font-size: 0.9rem;
+            font-weight: 800;
+            font-size: 0.95rem;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
-            transition: 0.3s;
-        }
-
-        .wpp-1 {
-            background: #25d366;
-        }
-
-        .wpp-2 {
-            background: #128c7e;
+            transition: transform 0.18s ease, filter 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 8px 18px rgba(0,0,0,0.20);
         }
 
         .btn-wpp:hover {
-            filter: brightness(1.2);
+            filter: brightness(1.07);
+            transform: translateY(-1px);
+        }
+
+        .btn-wpp:active {
+            transform: scale(0.97);
+        }
+
+        .wpp-1 {
+            background: linear-gradient(180deg, #2ee86f, #1fb958);
+        }
+
+        .wpp-2 {
+            background: linear-gradient(180deg, #16a38d, #0f7f6e);
+        }
+
+        @media (max-width: 600px) {
+            .topo-festa {
+                gap: 10px;
+            }
+
+            .brinde {
+                width: 60px;
+                height: 66px;
+            }
+
+            .copo {
+                width: 24px;
+                height: 40px;
+            }
+
+            .copo-esq { left: 4px; }
+            .copo-dir { right: 4px; }
+
+            .espirro.e1 { left: 18px; bottom: 36px; }
+            .espirro.e2 { right: 18px; bottom: 36px; }
+            .espirro.e3 { left: 25px; bottom: 42px; }
+
+            .mini-bolha.mb1 { left: 20px; bottom: 48px; }
+            .mini-bolha.mb2 { left: 30px; bottom: 50px; }
+            .mini-bolha.mb3 { left: 36px; bottom: 48px; }
+
+            header h1 {
+                font-size: 2rem;
+                letter-spacing: 1px;
+            }
+
+            .nome-preco .nome {
+                font-size: 0.95rem;
+            }
+
+            .total-display {
+                font-size: 1.25rem;
+            }
+
+            .btn-wpp {
+                font-size: 0.88rem;
+                padding: 13px 8px;
+            }
         }
     </style>
 </head>
@@ -284,81 +671,222 @@
         <span class="bolha b6"></span>
         <span class="bolha b7"></span>
         <span class="bolha b8"></span>
+        <span class="bolha b9"></span>
+        <span class="bolha b10"></span>
 
-        <span class="cerveja c1">🍺</span>
-        <span class="cerveja c2">🍻</span>
-        <span class="cerveja c3">🍺</span>
-        <span class="cerveja c4">🍻</span>
-        <span class="cerveja c5">🍺</span>
+        <span class="cerveja-bg c1">🍺</span>
+        <span class="cerveja-bg c2">🍻</span>
+        <span class="cerveja-bg c3">🍺</span>
+        <span class="cerveja-bg c4">🍻</span>
+        <span class="cerveja-bg c5">🍺</span>
+        <span class="cerveja-bg c6">🍻</span>
     </div>
 
     <header>
-        <h1>Bar do Tio Chico 🍻</h1>
-        <p>O Ponto de Encontro da Colônia</p>
+        <div class="topo-festa">
+            <div class="brinde">
+                <div class="copo copo-esq"></div>
+                <div class="copo copo-dir"></div>
+                <span class="espirro e1"></span>
+                <span class="espirro e2"></span>
+                <span class="espirro e3"></span>
+                <span class="mini-bolha mb1"></span>
+                <span class="mini-bolha mb2"></span>
+                <span class="mini-bolha mb3"></span>
+            </div>
+
+            <div class="titulo-wrap">
+                <h1>Bar do Tio Chico</h1>
+                <p>O ponto de encontro da colônia</p>
+            </div>
+
+            <div class="brinde">
+                <div class="copo copo-esq"></div>
+                <div class="copo copo-dir"></div>
+                <span class="espirro e1"></span>
+                <span class="espirro e2"></span>
+                <span class="espirro e3"></span>
+                <span class="mini-bolha mb1"></span>
+                <span class="mini-bolha mb2"></span>
+                <span class="mini-bolha mb3"></span>
+            </div>
+        </div>
     </header>
 
     <div class="container">
         <section>
-            <h2>Cervejas Geladas</h2>
+            <h2>🍺 Cervejas Geladas</h2>
+
             <div class="produto">
-                <div class="nome-preco"><span class="nome">Antarctica (Lata)</span><span class="preco">R$ 5,00</span></div>
-                <div class="controles"><button onclick="mudar('ant_lata',-1)">-</button><input id="ant_lata" value="0" readonly><button onclick="mudar('ant_lata',1)">+</button></div>
+                <div class="nome-preco">
+                    <span class="nome">Antarctica (Lata)</span>
+                    <span class="preco">R$ 5,00</span>
+                </div>
+                <div class="controles">
+                    <button onclick="mudar('ant_lata',-1)">−</button>
+                    <input id="ant_lata" value="0" readonly>
+                    <button onclick="mudar('ant_lata',1)">+</button>
+                </div>
             </div>
+
             <div class="produto">
-                <div class="nome-preco"><span class="nome">Antarctica (Caixa)</span><span class="preco">R$ 50,00</span></div>
-                <div class="controles"><button onclick="mudar('ant_cx',-1)">-</button><input id="ant_cx" value="0" readonly><button onclick="mudar('ant_cx',1)">+</button></div>
+                <div class="nome-preco">
+                    <span class="nome">Antarctica (Caixa)</span>
+                    <span class="preco">R$ 50,00</span>
+                </div>
+                <div class="controles">
+                    <button onclick="mudar('ant_cx',-1)">−</button>
+                    <input id="ant_cx" value="0" readonly>
+                    <button onclick="mudar('ant_cx',1)">+</button>
+                </div>
             </div>
+
             <div class="produto">
-                <div class="nome-preco"><span class="nome">Skol (Lata)</span><span class="preco">R$ 5,00</span></div>
-                <div class="controles"><button onclick="mudar('skol_lata',-1)">-</button><input id="skol_lata" value="0" readonly><button onclick="mudar('skol_lata',1)">+</button></div>
+                <div class="nome-preco">
+                    <span class="nome">Skol (Lata)</span>
+                    <span class="preco">R$ 5,00</span>
+                </div>
+                <div class="controles">
+                    <button onclick="mudar('skol_lata',-1)">−</button>
+                    <input id="skol_lata" value="0" readonly>
+                    <button onclick="mudar('skol_lata',1)">+</button>
+                </div>
             </div>
+
             <div class="produto">
-                <div class="nome-preco"><span class="nome">Skol (Caixa)</span><span class="preco">R$ 50,00</span></div>
-                <div class="controles"><button onclick="mudar('skol_cx',-1)">-</button><input id="skol_cx" value="0" readonly><button onclick="mudar('skol_cx',1)">+</button></div>
+                <div class="nome-preco">
+                    <span class="nome">Skol (Caixa)</span>
+                    <span class="preco">R$ 50,00</span>
+                </div>
+                <div class="controles">
+                    <button onclick="mudar('skol_cx',-1)">−</button>
+                    <input id="skol_cx" value="0" readonly>
+                    <button onclick="mudar('skol_cx',1)">+</button>
+                </div>
             </div>
+
             <div class="produto">
-                <div class="nome-preco"><span class="nome">Amstel (Lata)</span><span class="preco">R$ 5,00</span></div>
-                <div class="controles"><button onclick="mudar('ams_lata',-1)">-</button><input id="ams_lata" value="0" readonly><button onclick="mudar('ams_lata',1)">+</button></div>
+                <div class="nome-preco">
+                    <span class="nome">Amstel (Lata)</span>
+                    <span class="preco">R$ 5,00</span>
+                </div>
+                <div class="controles">
+                    <button onclick="mudar('ams_lata',-1)">−</button>
+                    <input id="ams_lata" value="0" readonly>
+                    <button onclick="mudar('ams_lata',1)">+</button>
+                </div>
             </div>
+
             <div class="produto">
-                <div class="nome-preco"><span class="nome">Amstel (Caixa)</span><span class="preco">R$ 50,00</span></div>
-                <div class="controles"><button onclick="mudar('ams_cx',-1)">-</button><input id="ams_cx" value="0" readonly><button onclick="mudar('ams_cx',1)">+</button></div>
+                <div class="nome-preco">
+                    <span class="nome">Amstel (Caixa)</span>
+                    <span class="preco">R$ 50,00</span>
+                </div>
+                <div class="controles">
+                    <button onclick="mudar('ams_cx',-1)">−</button>
+                    <input id="ams_cx" value="0" readonly>
+                    <button onclick="mudar('ams_cx',1)">+</button>
+                </div>
             </div>
         </section>
 
         <section>
-            <h2>Bebidas e Diversos</h2>
+            <h2>🥤 Bebidas e Diversos</h2>
+
             <div class="produto">
-                <div class="nome-preco"><span class="nome">Coca 2L</span><span class="preco">R$ 14,00</span></div>
-                <div class="controles"><button onclick="mudar('c2l',-1)">-</button><input id="c2l" value="0" readonly><button onclick="mudar('c2l',1)">+</button></div>
+                <div class="nome-preco">
+                    <span class="nome">Coca 2L</span>
+                    <span class="preco">R$ 14,00</span>
+                </div>
+                <div class="controles">
+                    <button onclick="mudar('c2l',-1)">−</button>
+                    <input id="c2l" value="0" readonly>
+                    <button onclick="mudar('c2l',1)">+</button>
+                </div>
             </div>
+
             <div class="produto">
-                <div class="nome-preco"><span class="nome">Coca-Cola (Latinha)</span><span class="preco">R$ 5,00</span></div>
-                <div class="controles"><button onclick="mudar('coca_lata',-1)">-</button><input id="coca_lata" value="0" readonly><button onclick="mudar('coca_lata',1)">+</button></div>
+                <div class="nome-preco">
+                    <span class="nome">Coca-Cola (Latinha)</span>
+                    <span class="preco">R$ 5,00</span>
+                </div>
+                <div class="controles">
+                    <button onclick="mudar('coca_lata',-1)">−</button>
+                    <input id="coca_lata" value="0" readonly>
+                    <button onclick="mudar('coca_lata',1)">+</button>
+                </div>
             </div>
+
             <div class="produto">
-                <div class="nome-preco"><span class="nome">Fanta (Latinha)</span><span class="preco">R$ 5,00</span></div>
-                <div class="controles"><button onclick="mudar('fanta_lata',-1)">-</button><input id="fanta_lata" value="0" readonly><button onclick="mudar('fanta_lata',1)">+</button></div>
+                <div class="nome-preco">
+                    <span class="nome">Fanta (Latinha)</span>
+                    <span class="preco">R$ 5,00</span>
+                </div>
+                <div class="controles">
+                    <button onclick="mudar('fanta_lata',-1)">−</button>
+                    <input id="fanta_lata" value="0" readonly>
+                    <button onclick="mudar('fanta_lata',1)">+</button>
+                </div>
             </div>
+
             <div class="produto">
-                <div class="nome-preco"><span class="nome">Pepsi 3L</span><span class="preco">R$ 12,00</span></div>
-                <div class="controles"><button onclick="mudar('p3l',-1)">-</button><input id="p3l" value="0" readonly><button onclick="mudar('p3l',1)">+</button></div>
+                <div class="nome-preco">
+                    <span class="nome">Pepsi 3L</span>
+                    <span class="preco">R$ 12,00</span>
+                </div>
+                <div class="controles">
+                    <button onclick="mudar('p3l',-1)">−</button>
+                    <input id="p3l" value="0" readonly>
+                    <button onclick="mudar('p3l',1)">+</button>
+                </div>
             </div>
+
             <div class="produto">
-                <div class="nome-preco"><span class="nome">Guaraná</span><span class="preco">R$ 10,00</span></div>
-                <div class="controles"><button onclick="mudar('gua',-1)">-</button><input id="gua" value="0" readonly><button onclick="mudar('gua',1)">+</button></div>
+                <div class="nome-preco">
+                    <span class="nome">Guaraná</span>
+                    <span class="preco">R$ 10,00</span>
+                </div>
+                <div class="controles">
+                    <button onclick="mudar('gua',-1)">−</button>
+                    <input id="gua" value="0" readonly>
+                    <button onclick="mudar('gua',1)">+</button>
+                </div>
             </div>
+
             <div class="produto">
-                <div class="nome-preco"><span class="nome">Cachaça</span><span class="preco">R$ 12,00</span></div>
-                <div class="controles"><button onclick="mudar('cac',-1)">-</button><input id="cac" value="0" readonly><button onclick="mudar('cac',1)">+</button></div>
+                <div class="nome-preco">
+                    <span class="nome">Cachaça</span>
+                    <span class="preco">R$ 12,00</span>
+                </div>
+                <div class="controles">
+                    <button onclick="mudar('cac',-1)">−</button>
+                    <input id="cac" value="0" readonly>
+                    <button onclick="mudar('cac',1)">+</button>
+                </div>
             </div>
+
             <div class="produto">
-                <div class="nome-preco"><span class="nome">Cigarros</span><span class="preco">R$ 10,00</span></div>
-                <div class="controles"><button onclick="mudar('cig',-1)">-</button><input id="cig" value="0" readonly><button onclick="mudar('cig',1)">+</button></div>
+                <div class="nome-preco">
+                    <span class="nome">Cigarros</span>
+                    <span class="preco">R$ 10,00</span>
+                </div>
+                <div class="controles">
+                    <button onclick="mudar('cig',-1)">−</button>
+                    <input id="cig" value="0" readonly>
+                    <button onclick="mudar('cig',1)">+</button>
+                </div>
             </div>
+
             <div class="produto">
-                <div class="nome-preco"><span class="nome">Skiny</span><span class="preco">R$ 2,50</span></div>
-                <div class="controles"><button onclick="mudar('ski',-1)">-</button><input id="ski" value="0" readonly><button onclick="mudar('ski',1)">+</button></div>
+                <div class="nome-preco">
+                    <span class="nome">Skiny</span>
+                    <span class="preco">R$ 2,50</span>
+                </div>
+                <div class="controles">
+                    <button onclick="mudar('ski',-1)">−</button>
+                    <input id="ski" value="0" readonly>
+                    <button onclick="mudar('ski',1)">+</button>
+                </div>
             </div>
         </section>
     </div>
@@ -407,7 +935,7 @@
         };
 
         function mudar(id, v) {
-            let el = document.getElementById(id);
+            const el = document.getElementById(id);
             let n = parseInt(el.value) + v;
             if (n >= 0) {
                 el.value = n;
@@ -416,11 +944,11 @@
         }
 
         function calc() {
-            let t = 0;
+            let total = 0;
             for (let k in tab) {
-                t += parseInt(document.getElementById(k).value) * tab[k];
+                total += parseInt(document.getElementById(k).value) * tab[k];
             }
-            document.getElementById('res').innerText = t.toFixed(2).replace('.', ',');
+            document.getElementById("res").innerText = total.toFixed(2).replace(".", ",");
         }
 
         function zap(n) {
@@ -439,9 +967,9 @@
                 return alert("Selecione algo!");
             }
 
-            m += `\n*TOTAL: R$ ${document.getElementById('res').innerText}*`;
+            m += `\n*TOTAL: R$ ${document.getElementById("res").innerText}*`;
 
-            let f = (n === 1) ? "5568992380864" : "5568992569482";
+            const f = (n === 1) ? "5568992380864" : "5568992569482";
             window.open(`https://wa.me/${f}?text=${encodeURIComponent(m)}`);
         }
     </script>
