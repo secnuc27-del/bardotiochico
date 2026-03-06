@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bar do Tio Chico - Encomendas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Bar do Tio Chico 🍻</h1>
+        <p>O Ponto de Encontro da Colônia</p>
+    </header>
+
+    <main>
+        <section id="cervejas">
+            <h2>Cervejas</h2>
+            <div class="produto">
+                <span>Antarctica</span>
+                <input type="number" id="antarctica" min="0" placeholder="0">
+            </div>
+            <div class="produto">
+                <span>Skol</span>
+                <input type="number" id="skol" min="0" placeholder="0">
+            </div>
+            <div class="produto">
+                <span>Amstel</span>
+                <input type="number" id="amstel" min="0" placeholder="0">
+            </div>
+        </section>
+
+        <section id="bebidas">
+            <h2>Bebidas e Refrigerantes</h2>
+            <div class="produto">
+                <span>Coca-Cola 2L</span>
+                <input type="number" id="coca2l" min="0" placeholder="0">
+            </div>
+            <div class="produto">
+                <span>Pepsi 3L</span>
+                <input type="number" id="pepsi3l" min="0" placeholder="0">
+            </div>
+            <div class="produto">
+                <span>Guaraná</span>
+                <input type="number" id="guarana" min="0" placeholder="0">
+            </div>
+            <div class="produto">
+                <span>Coca-Cola Latinha</span>
+                <input type="number" id="cocalata" min="0" placeholder="0">
+            </div>
+            <div class="produto">
+                <span>Fanta Latinha</span>
+                <input type="number" id="fanta" min="0" placeholder="0">
+            </div>
+            <div class="produto">
+                <span>Pithulinha</span>
+                <input type="number" id="pithulinha" min="0" placeholder="0">
+            </div>
+            <div class="produto">
+                <span>Cachaça</span>
+                <input type="number" id="cachaca" min="0" placeholder="0">
+            </div>
+        </section>
+
+        <section id="petiscos">
+            <h2>Salgadinhos e Tabacaria</h2>
+            <div class="produto">
+                <span>Skiny (Pacote)</span>
+                <input type="number" id="skiny" min="0" placeholder="0">
+            </div>
+            <div class="produto">
+                <span>Outros Salgadinhos</span>
+                <input type="number" id="salgadinho" min="0" placeholder="0">
+            </div>
+            <div class="produto">
+                <span>Cigarros (Maço/Unid)</span>
+                <input type="number" id="cigarro" min="0" placeholder="0">
+            </div>
+        </section>
+
+        <button onclick="enviarPedido(1)" style="margin-bottom: 12px; background-color: #25d366;">
+            Pedir no WhatsApp (Opção 1) 📱
+        </button>
+        
+        <button onclick="enviarPedido(2)" style="background-color: #128c7e;">
+            Pedir no WhatsApp (Opção 2) 📱
+        </button>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
