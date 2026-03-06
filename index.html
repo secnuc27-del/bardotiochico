@@ -14,7 +14,7 @@
 
     <main>
         <section>
-            <h2>Bebidas Geladas</h2>
+            <h2>Nossas Bebidas</h2>
             <div class="produto">
                 <span>Cerveja Latinha (Amstel/Antarctica)</span>
                 <div class="controles">
@@ -31,26 +31,59 @@
                     <button onclick="mudarQtd('coca2l', 1)">+</button>
                 </div>
             </div>
+            <div class="produto">
+                <span>Coca-Cola Latinha</span>
+                <div class="controles">
+                    <button onclick="mudarQtd('cocalata', -1)">-</button>
+                    <input type="number" id="cocalata" value="0" readonly>
+                    <button onclick="mudarQtd('cocalata', 1)">+</button>
+                </div>
+            </div>
+            <div class="produto">
+                <span>Fanta Latinha</span>
+                <div class="controles">
+                    <button onclick="mudarQtd('fanta', -1)">-</button>
+                    <input type="number" id="fanta" value="0" readonly>
+                    <button onclick="mudarQtd('fanta', 1)">+</button>
+                </div>
+            </div>
+            <div class="produto">
+                <span>Pithulinha</span>
+                <div class="controles">
+                    <button onclick="mudarQtd('pithulinha', -1)">-</button>
+                    <input type="number" id="pithulinha" value="0" readonly>
+                    <button onclick="mudarQtd('pithulinha', 1)">+</button>
+                </div>
+            </div>
         </section>
 
         <section>
-            <h2>Salgadinhos e Outros</h2>
+            <h2>Outros e Derivados</h2>
             <div class="produto">
-                <span>Skiny / Salgadinhos</span>
+                <span>Salgadinhos (Pacote)</span>
                 <div class="controles">
                     <button onclick="mudarQtd('skiny', -1)">-</button>
                     <input type="number" id="skiny" value="0" readonly>
                     <button onclick="mudarQtd('skiny', 1)">+</button>
                 </div>
             </div>
+            <div class="produto">
+                <span>Cachaça de Primeira</span>
+                <div class="controles">
+                    <button onclick="mudarQtd('cachaca', -1)">-</button>
+                    <input type="number" id="cachaca" value="0" readonly>
+                    <button onclick="mudarQtd('cachaca', 1)">+</button>
+                </div>
+            </div>
         </section>
 
         <div class="total-caixa">
-            <h3>TOTAL: R$ <span id="valor-total">0,00</span></h3>
+            <h3>TOTAL DO PEDIDO: R$ <span id="valor-total">0,00</span></h3>
         </div>
 
-        <button onclick="enviarPedido(1)" class="btn-whats">Pedir no WhatsApp 1 📱</button>
+        <button onclick="enviarPedido(1)" class="btn-whats">Enviar Pedido no WhatsApp 📱</button>
     </main>
+
     <script src="script.js"></script>
 </body>
 </html>
